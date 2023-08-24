@@ -60,9 +60,9 @@ async fn load(data: Data, load_context: &mut LoadContext<'_>) -> Result<()> {
 #[derive(Clone, TypePath, TypeUuid)]
 #[uuid = "929113bb-9187-44c3-87be-6027fc3b7ac5"]
 pub struct BundleAsset {
-    pub(crate) bundle: Arc<FluentBundle<Arc<FluentResource>, IntlLangMemoizer>>,
+    pub bundle: Arc<FluentBundle<Arc<FluentResource>, IntlLangMemoizer>>,
     /// The resource handles that this bundle depends on
-    pub(crate) resource_handles: Vec<Handle<ResourceAsset>>,
+    pub resource_handles: Vec<Handle<ResourceAsset>>,
 }
 
 impl Deref for BundleAsset {
