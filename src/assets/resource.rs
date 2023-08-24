@@ -38,7 +38,7 @@ fn load(data: Arc<FluentResource>, load_context: &mut LoadContext<'_>) {
 /// [`FluentResource`](fluent::FluentResource) wrapper
 #[derive(Clone, Debug, TypePath, TypeUuid)]
 #[uuid = "0b2367cb-fb4a-4746-a305-df98b26dddf6"]
-pub struct ResourceAsset(pub(crate) Arc<FluentResource>);
+pub struct ResourceAsset(pub Arc<FluentResource>);
 
 impl Deref for ResourceAsset {
     type Target = FluentResource;
