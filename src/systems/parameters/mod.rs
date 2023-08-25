@@ -5,7 +5,7 @@
 
 use crate::{exts::fluent::BundleExt, BundleAsset, Locale, Localization};
 use bevy::{ecs::system::SystemParam, prelude::*};
-use std::{borrow::Borrow, collections::HashMap};
+use std::collections::HashMap;
 
 /// Localization builder
 #[derive(SystemParam)]
@@ -15,15 +15,15 @@ pub struct LocalizationBuilder<'w> {
 }
 
 impl LocalizationBuilder<'_> {
-    pub fn build(
+    pub fn build<'a>(
         &self,
-        handles: impl IntoIterator<Item = impl Borrow<Handle<BundleAsset>>>,
+        handles: impl IntoIterator<Item = &'a Handle<BundleAsset>>,
     ) -> Localization {
         let locale_entries: HashMap<_, _> = handles
             .into_iter()
             .map(|handle| {
-                let asset = self.assets.get(handle.borrow()).unwrap();
-                (asset.locale(), Entry { handle: handle.borrow(), asset })
+                let asset = self.assets.get(handle).unwrap();
+                (asset.locale(), Entry { handle, asset })
             })
             .collect();
         let locales = self.locale.fallback_chain(locale_entries.keys().cloned());
