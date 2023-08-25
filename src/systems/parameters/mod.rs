@@ -15,9 +15,9 @@ pub struct LocalizationBuilder<'w> {
 }
 
 impl LocalizationBuilder<'_> {
-    pub fn build<'a>(
+    pub fn build(
         &self,
-        handles: impl IntoIterator<Item = &'a Handle<BundleAsset>>,
+        handles: impl IntoIterator<Item = impl AsRef<Handle<BundleAsset>>>,
     ) -> Localization {
         let locale_entries: HashMap<_, _> = handles
             .into_iter()
