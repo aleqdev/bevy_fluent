@@ -17,7 +17,7 @@ pub struct LocalizationBuilder<'w> {
 impl LocalizationBuilder<'_> {
     pub fn build(
         &self,
-        handles: impl IntoIterator<Item = impl AsRef<Handle<BundleAsset>>>,
+        handles: impl IntoIterator<Item = impl std::borrow::Borrow<Handle<BundleAsset>>>,
     ) -> Localization {
         let locale_entries: HashMap<_, _> = handles
             .into_iter()
