@@ -22,8 +22,8 @@ impl LocalizationBuilder<'_> {
         let locale_entries: HashMap<_, _> = handles
             .into_iter()
             .map(|handle| {
-                let asset = self.assets.get(handle).unwrap();
-                (asset.locale(), Entry { handle, asset })
+                let asset = self.assets.get(handle.borrow()).unwrap();
+                (asset.locale(), Entry { handle.borrow(), asset })
             })
             .collect();
         let locales = self.locale.fallback_chain(locale_entries.keys().cloned());
