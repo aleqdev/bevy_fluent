@@ -1,16 +1,14 @@
 //! Localization asset
 
 use crate::{exts::fluent::BundleExt, BundleAsset};
-use bevy::{
-    prelude::*,
-    utils::tracing::{self, instrument},
-};
+use bevy::{prelude::*, utils::tracing::instrument};
 use fluent::FluentArgs;
 use fluent_content::{Content, Request};
 use indexmap::IndexMap;
 use std::{
     borrow::Borrow,
     fmt::{self, Debug, Formatter},
+    ops::{Deref, DerefMut},
 };
 use unic_langid::LanguageIdentifier;
 
@@ -58,5 +56,19 @@ impl Debug for Localization {
         f.debug_tuple("Localization")
             .field(&self.locales().collect::<Vec<_>>())
             .finish()
+    }
+}
+
+impl Deref for Localization {
+    type Target = IndexMap<Handle<BundleAsset>, BundleAsset>;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+impl DerefMut for Localization {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.0
     }
 }
